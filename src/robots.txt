@@ -1,2 +1,3 @@
+Sitemap: http://localhost/sitemap.php
 User-agent: *
 Disallow: /
