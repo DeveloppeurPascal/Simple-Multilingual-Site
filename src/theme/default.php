@@ -18,11 +18,20 @@
 		<?php
 			for ($i = 0; $i < count(SITE_LANG_LIST); $i++) {
 				if (SITE_LANG !== SITE_LANG_LIST[$i]) {
-					print("<link rel=\"alternate\" href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\" hreflang=\"".SITE_LANG_LIST[$i]."\" />");
+					print("<link rel=\"alternate\" href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\" hreflang=\"".SITE_LANG_LIST[$i]."\" />\n");
 				}
 			}
 			if (! empty(SITE_LANG_DEFAULT)) {
-				print("<link rel=\"alternate\" href=\"".SITE_URL."/".SITE_LANG_DEFAULT."/".$page_filename."\" hreflang=\"x-default\" />");
+				print("<link rel=\"alternate\" href=\"".SITE_URL."/".SITE_LANG_DEFAULT."/".$page_filename."\" hreflang=\"x-default\" />\n");
+			}
+			if (defined("APPLE_APP_ID") && (! empty(APPLE_APP_ID))) {
+				print("<meta name=\"apple-itunes-app\" content=\"app-id=".APPLE_APP_ID."\" />\n");
+			}
+			if (defined("META_ROBOTS") && (! empty(META_ROBOTS))) {
+				print("<META NAME=\"ROBOTS\" CONTENT=\"".META_ROBOTS."\">\n");
+			}
+			if (defined("FAVICON_URL") && (! empty(FAVICON_URL))) {
+				print("<link rel=\"icon\" type=\"image/x-icon\" href=\"".FAVICON_URL."\">\n");
 			}
 		?>
 	</head>
@@ -32,11 +41,21 @@
 				$HasSlash = (substr(SITE_URL,strlen(SITE_URL)-1,1) == "/");
 				for ($i = 0; $i < count(SITE_LANG_LIST); $i++) {
 					if (SITE_LANG !== SITE_LANG_LIST[$i]) {
-						if ($HasSlash) {
-							print("<a href=\"".SITE_URL.SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a>");
+						if (file_exists(__DIR__."/../img/flags/".strtolower(SITE_LANG_LIST[$i]).".png")) {
+							if ($HasSlash) {
+								print("<a href=\"".SITE_URL.SITE_LANG_LIST[$i]."/".$page_filename."\"><img src=\"".SITE_URL."img/flags/".strtolower(SITE_LANG_LIST[$i]).".png\" class=\"flag\" alt=\"".strtoupper(SITE_LANG_LIST[$i])."\"></a> ");
+							}
+							else {
+								print("<a href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\"><img src=\"".SITE_URL."/img/flags/".strtolower(SITE_LANG_LIST[$i]).".png\" class=\"flag\" alt=\"".strtoupper(SITE_LANG_LIST[$i])."\"></a> ");
+							}
 						}
 						else {
-							print("<a href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a>");
+							if ($HasSlash) {
+								print("<a href=\"".SITE_URL.SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a> ");
+							}
+							else {
+								print("<a href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a> ");
+							}
 						}
 					}
 				}
