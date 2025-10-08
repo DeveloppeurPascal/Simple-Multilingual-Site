@@ -29,5 +29,5 @@ HTML;
 		require_once($page_template);
 	}
 	else {
-		require_once(__DIR__."/404.php");
+		require_once(__DIR__."/404-filenotfound.php");
 	}
