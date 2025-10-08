@@ -21,9 +21,11 @@
 	// For real domaine or IP, copy your defines in a "./__common_settings-web.inc.php" file.
 
 	if (("127.0.0.1" == $_SERVER["SERVER_ADDR"]) || ("::1" == $_SERVER["SERVER_ADDR"])) {
+		define("_IsLocal", true);
 		// parameters for a localhost web site (dev, debug, test)
 		@include_once(__DIR__."/__common_settings-localhost.inc.php");
 	} else {
+		define("_IsLocal", false);
 		// parameters for a real domain name or IP (release)
 		@include_once(__DIR__."/__common_settings-web.inc.php");
 	}
@@ -61,3 +63,29 @@
 		define("SITE_URL", "http://localhost/Simple-Multilingual-Site/src");
 		// define("SITE_URL", "https://mywebsite.zorglub.web");
 		// define("SITE_URL", "https://mywebsite.zorglub.web/InAFolder/");
+
+	// ID of your application on iTunes (or Apple Connect)
+	if (!defined("APPLE_APP_ID"))
+		define("APPLE_APP_ID", "");
+
+	// Value to use for the ROBOTS META tag (cf https://www.robotstxt.org)
+	if (!defined("META_ROBOTS"))
+		define("META_ROBOTS", "index,follow");
+
+	// URL of the favicon file ("favicon.ico" or other)
+	if (!defined("FAVICON_URL"))
+		if (file_exists(__DIR__."/favicon.ico")) {
+			define("FAVICON_URL", SITE_URL."/favicon.ico");
+		}
+		else if (file_exists(__DIR__."/favicon.png")) {
+			define("FAVICON_URL", SITE_URL."/favicon.png");
+		}
+		else if (file_exists(__DIR__."/favicon.gif")) {
+			define("FAVICON_URL", SITE_URL."/favicon.gif");
+		}
+		else if (file_exists(__DIR__."/favicon.jpg")) {
+			define("FAVICON_URL", SITE_URL."/favicon.jpg");
+		}
+		else {
+			define("FAVICON_URL", "");
+		}
