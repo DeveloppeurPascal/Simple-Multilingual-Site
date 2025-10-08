@@ -38,24 +38,13 @@
 	<body>
 		<header>
 			<nav><a href="index.php">Home</a> <a href="page1.php">Page 1</a> <a href="page2.php">Page 2</a> <?php
-				$HasSlash = (substr(SITE_URL,strlen(SITE_URL)-1,1) == "/");
 				for ($i = 0; $i < count(SITE_LANG_LIST); $i++) {
 					if (SITE_LANG !== SITE_LANG_LIST[$i]) {
 						if (file_exists(__DIR__."/../img/flags/".strtolower(SITE_LANG_LIST[$i]).".png")) {
-							if ($HasSlash) {
-								print("<a href=\"".SITE_URL.SITE_LANG_LIST[$i]."/".$page_filename."\"><img src=\"".SITE_URL."img/flags/".strtolower(SITE_LANG_LIST[$i]).".png\" class=\"flag\" alt=\"".strtoupper(SITE_LANG_LIST[$i])."\"></a> ");
-							}
-							else {
-								print("<a href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\"><img src=\"".SITE_URL."/img/flags/".strtolower(SITE_LANG_LIST[$i]).".png\" class=\"flag\" alt=\"".strtoupper(SITE_LANG_LIST[$i])."\"></a> ");
-							}
+							print("<a href=\"../".SITE_LANG_LIST[$i]."/".$page_filename."\"><img src=\"../img/flags/".strtolower(SITE_LANG_LIST[$i]).".png\" class=\"flag\" alt=\"".strtoupper(SITE_LANG_LIST[$i])."\"></a> ");
 						}
 						else {
-							if ($HasSlash) {
-								print("<a href=\"".SITE_URL.SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a> ");
-							}
-							else {
-								print("<a href=\"".SITE_URL."/".SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a> ");
-							}
+							print("<a href=\"../".SITE_LANG_LIST[$i]."/".$page_filename."\">".strtoupper(SITE_LANG_LIST[$i])."</a> ");
 						}
 					}
 				}
