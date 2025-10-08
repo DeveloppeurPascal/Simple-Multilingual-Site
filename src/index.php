@@ -7,7 +7,21 @@
 	// Infos and updates :
 	// https://github.com/DeveloppeurPascal/Simple-Multilingual-Site
 
+	function PageNotFound($lang_to_use = "") {
+		if (! empty($lng)) {
+			header("location: ".SITE_URL."/".$lang_to_use."/404-filenotfound.php");
+			die();
+		}
+		else {
+			http_response_code(404);
+			die("Page not found");
+		}
+	}
+
 	require_once(__DIR__."/__common_settings-dist.inc.php");
+
+	// ********************************************************************************
+	// What language to use ?
 
 	$lang_to_use = "";
 
@@ -41,9 +55,34 @@
 	}
 
 	if (empty($lang_to_use)) {
-		require_once(__DIR__."/404.php");
+		PageNotFound();
+	}
+
+	// ********************************************************************************
+	// What page to show ?
+
+	$page = "";
+	if ((! isset($_SERVER["REQUEST_URI"])) || empty($_SERVER["REQUEST_URI"]) || (false !== strrpos(SITE_URL, $_SERVER["REQUEST_URI"])) || (false !== strrpos(SITE_URL."/", $_SERVER["REQUEST_URI"]))) {
+		$page = "index.php";
+	}
+	else if ((($lng=$lang_to_use."/") == substr($_SERVER["REQUEST_URI"],0,strlen($lng))) || (($lng="/".$lang_to_use."/") == substr($_SERVER["REQUEST_URI"],0,strlen($lng)))) {
+		$page = ""; // file in a language subfolder not found
+	}
+	else if ("/" == substr($_SERVER["REQUEST_URI"],0,1)) {
+		$page = substr($_SERVER["REQUEST_URI"],1);
 	}
 	else {
-		http_response_code(403);
-		header("location: ./".$lang_to_use."/");
+		$page = $_SERVER["REQUEST_URI"];
+	}
+
+	// var_dump($page);exit;
+	// var_dump($_SERVER["REQUEST_URI"]);exit;
+	// var_dump(_IsLocal);exit;
+
+	if (empty($page)) {
+		PageNotFound();
+	}
+	else {
+		http_response_code(301);
+		header("location: ".SITE_URL."/".$lang_to_use."/".$page);
 	}
