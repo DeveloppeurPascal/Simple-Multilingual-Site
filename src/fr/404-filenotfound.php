@@ -15,10 +15,8 @@
 	// *****************************************
 
 	$page_title = "Fichier non trouvé";
-	$page_content = <<<HTML
-<article>
-	<p>Cette page n'existe pas.</p>
-<article>
+	$page_text_top = <<<HTML
+<p>Cette page n'existe pas.</p>
 HTML;
 	$page_template = DEFAULT_PAGE_TEMPLATE;
 	$page_filename = "404-filenotfound.php";
@@ -30,5 +28,5 @@ HTML;
 		require_once($page_template);
 	}
 	else {
-		require_once(_DIR_."/../404.php");
+		require_once(_DIR_."/../404-filenotfound.php");
 	}
