@@ -8,7 +8,7 @@
 	// https://github.com/DeveloppeurPascal/Simple-Multilingual-Site
 
 	function PageNotFound($lang_to_use = "") {
-		if (! empty($lng)) {
+		if (! empty($lang_to_use)) {
 			header("location: ".SITE_URL."/".$lang_to_use."/404-filenotfound.php");
 			die();
 		}
