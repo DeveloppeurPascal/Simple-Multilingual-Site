@@ -1,3 +1,4 @@
 Sitemap: http://localhost/sitemap.php
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /2vb5jgh5jg5j
