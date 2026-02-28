@@ -1,6 +1,6 @@
 <?php
 	// Simple Multilingual Site
-	// (c) 2025 Patrick Prémartin
+	// (c) 2025-2026 Patrick Prémartin
 	//
 	// Distributed under license AGPL.
 	//
@@ -89,3 +89,16 @@
 		else {
 			define("FAVICON_URL", "");
 		}
+
+	// IndexNow search engine to call
+	// -> the search engines list is on https://www.indexnow.org/faq
+	if (!defined("_IndexNowSearchEngine"))
+		define("_IndexNowSearchEngine", "https://www.bing.com/indexnow");
+
+	// Maximum cache retention time (in seconds) between two uses of IndexNow
+	if (!defined("_IndexNowMaxCacheRetentionInSeconds"))
+		define("_IndexNowMaxCacheRetentionInSeconds", 60*60); // 1 hour
+
+	// Maximum cache retention time (in seconds) between two uses of SiteMap
+	if (!defined("_SiteMapMaxCacheRetentionInSeconds"))
+		define("_SiteMapMaxCacheRetentionInSeconds", 24*60*60); // 1 day
